@@ -1,0 +1,40 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Dados fornecidos
+data = {
+    'arXiv_reference': [
+        '2205.03468', '2001.00081', '2109.07906', '2206.07635', '2206.03225',
+        '2104.12547', '2206.11922', '2001.04335', '2106.11521', '2111.01306',
+        'Kaggle', '2205.03946', '2304.02819', '2304.08275', '2305.09300',
+        '2307.03198', '2307.15452'
+    ],
+    'paper_number_of_pages': [
+        230, 12, 21, 9, 20, 23, 21, 6, 18, 10, None, 15, 9, 7, 8, 16, 16
+    ],
+    'paper_version_release_date': [
+        '2022-05-02', '2021-05-18', '2021-09-12', '2022-08-18', '2022-05-12',
+        '2021-04-09', '2024-02-19', '2020-01-21', '2021-07-09', '2021-11-02',
+        '2023-07-04', '2023-07-19', '2023-07-10', '2023-08-08', '2023-07-11',
+        '2023-07-13', '2023-07-28'
+    ]
+}
+
+# Criação do DataFrame
+df = pd.DataFrame(data)
+
+# Conversão da coluna 'paper_version_release_date' para datetime
+df['paper_version_release_date'] = pd.to_datetime(df['paper_version_release_date'])
+
+# Criação do gráfico
+plt.figure(figsize=(12, 8))
+plt.bar(df['paper_version_release_date'], df['paper_number_of_pages'], color='skyblue')
+plt.xlabel('Data de Lançamento')
+plt.ylabel('Número de Páginas')
+plt.title('Número de Páginas dos Papers por Data de Lançamento')
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+# Salvar o gráfico
+plt.savefig('number_of_pages_by_date.png')
+plt.show()
